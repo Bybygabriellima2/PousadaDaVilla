@@ -13,12 +13,13 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 20px;
+  position: relative; /* Adicionado para estabelecer contexto de posicionamento */
 }
 
 .logo-container {
   width: 160px;
   position: relative;
-  z-index: 100;
+  z-index: 150; /* Modificado: z-index menor que o hamburger menu */
 }
 
 @media (min-width: 768px) {
@@ -50,6 +51,8 @@
   list-style: none;
   justify-content: center;
   gap: 20px;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-list li a {
@@ -73,6 +76,8 @@
   border-radius: 3px;
   transition: background-color 0.3s;
   white-space: nowrap;
+  position: relative;
+  z-index: 150; /* Mesmo z-index do logo */
 }
 
 .reservas-btn:hover {
@@ -88,7 +93,7 @@
   width: 40px;
   height: 40px;
   position: relative;
-  z-index: 200;
+  z-index: 200; /* Modificado: valor maior para garantir que fique acima do logo */
   cursor: pointer;
 }
 
@@ -104,12 +109,14 @@
   height: 2px;
   background-color: white;
   transition: all 0.3s;
-}
-
-.hamburger-line:not(:last-child) {
   margin-bottom: 6px;
 }
 
+.hamburger-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Animação do menu hambúrguer */
 .hamburger-menu.open .hamburger-line:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -131,14 +138,8 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 90;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-}
-
-.mobile-overlay.visible {
   opacity: 1;
-  pointer-events: auto;
+  transition: opacity 0.3s;
 }
 
 /* Mobile Navigation */
@@ -149,7 +150,7 @@
   height: 100%;
   width: 256px;
   background-color: #006f72;
-  z-index: 95;
+  z-index: 190; /* Modificado: menor que o hamburger-menu para fechamento */
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   overflow-y: auto;
@@ -169,6 +170,8 @@
 
 .nav-list-mobile {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-list-mobile li {

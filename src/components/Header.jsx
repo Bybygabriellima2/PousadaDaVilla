@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'; // Ajuste o caminho se necessário
+import '../styles/header-styles.css'; // Importamos o CSS em arquivo separado
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -72,10 +73,12 @@ function Header() {
       </div>
 
       {/* Overlay para fechar o menu ao clicar fora */}
-      <div 
-        className={`mobile-overlay ${mobileMenuOpen ? 'visible' : ''}`}
-        onClick={closeMobileMenu}
-      ></div>
+      {mobileMenuOpen && (
+        <div 
+          className="mobile-overlay"
+          onClick={closeMobileMenu}
+        ></div>
+      )}
       
       {/* Menu Mobile */}
       <nav className={`nav-mobile ${mobileMenuOpen ? 'open' : ''}`}>
