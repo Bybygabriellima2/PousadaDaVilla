@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header Styles */
+.header {
+  position: relative;
+  background-color: #007a7a;
+  background-image: linear-gradient(to right, #006666, #00a3a3);
+  color: white;
+  padding: 15px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo-container {
+  position: relative;
+  width: 200px;
+  height: 80px;
+  z-index: 10;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.language-option img {
+  width: 24px;
+  height: auto;
+  border-radius: 2px;
+}
+
+.nav-desktop {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-list li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-list li a:hover {
+  color: #e0e0e0;
+}
+
+.reservas-btn {
+  background-color: white;
+  color: #007a7a;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.reservas-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.hamburger-menu span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #007a7a;
+  padding: 20px;
+  z-index: 99;
+}
+
+.nav-list-mobile {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-list-mobile li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Carousel Styles */
+.carousel {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carousel-dot.active {
+  background-color: white;
+}
+
+.carousel-social {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  color: #3b5998;
+  font-size: 20px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+  background-color: #f0f0f0;
+}
+
+/* Info Section Styles */
+.info-section {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+.info-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.info-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.info-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.info-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.info-image img:hover {
+  transform: scale(1.05);
+}
+
+.info-content {
+  padding: 20px;
+}
+
+.info-content h3 {
+  color: #007a7a;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.info-content p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f0f0e0;
+  padding: 20px;
+  text-align: center;
+}
+
+.contact-info {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.whatsapp {
+  color: #25d366;
+  margin-left: 5px;
+}
+
+.address {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .info-container {
+    flex-direction: column;
+  }
+  
+  .carousel {
+    height: 400px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+  
+  .hamburger-menu {
+    display: flex;
+  }
+  
+  .header-container {
+    padding: 0 15px;
+  }
+  
+  .reservas-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .carousel {
+    height: 350px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 22px;
+  }
+  
+  .info-section {
+    padding: 40px 0;
+  }
+  
+  .info-container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-container {
+    width: 150px;
+    height: 60px;
+  }
+  
+  .language-selector {
+    margin-right: 10px;
+  }
+  
+  .language-option img {
+    width: 20px;
+  }
+  
+  .carousel {
+    height: 300px;
+  }
+  
+  .carousel-caption {
+    bottom: 60px;
+    padding: 10px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 18px;
+  }
+  
+  .info-section {
+    padding: 30px 0;
+  }
+  
+  .info-card {
+    margin-bottom: 20px;
+  }
+  
+  .info-image {
+    height: 150px;
+  }
+  
+  .contact-info {
+    font-size: 14px;
+  }
+  
+  .address {
+    font-size: 12px;
+  }
+}

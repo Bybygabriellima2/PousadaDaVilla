@@ -1,0 +1,537 @@
+/* Estilos base e variáveis */
+:root {
+  --primary-color: #00817e;
+  --primary-light: #e0f7f6;
+  --primary-dark: #00635f;
+  --accent-color: #f8b400;
+  --text-color: #333;
+  --text-light: #666;
+  --background-light: #fff;
+  --background-dark: #f9f9f9;
+  --shadow-soft: 0 5px 15px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --transition-standard: all 0.3s ease;
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --font-family: 'Poppins', 'Helvetica', sans-serif;
+}
+
+/* Estilos globais */
+.localizacao-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Hero Section com efeito Parallax */
+.hero-section {
+  position: relative;
+  height: 500px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 var(--spacing-md);
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-top: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Seção de Introdução */
+.intro-section {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto var(--spacing-lg);
+  padding: 0 var(--spacing-md);
+}
+
+.intro-section h2 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.divider {
+  height: 3px;
+  width: 80px;
+  background-color: var(--accent-color);
+  margin: var(--spacing-sm) auto;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* Grid de conteúdo principal */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin: 0 auto var(--spacing-lg);
+  padding: 0 var(--spacing-md);
+  max-width: 1400px;
+}
+
+/* Informações de localização */
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.info-card {
+  display: flex;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-standard);
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  margin-right: var(--spacing-md);
+}
+
+.card-icon svg {
+  color: var(--primary-color);
+}
+
+.card-content h3 {
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.3rem;
+}
+
+.card-content p {
+  margin: var(--spacing-xs) 0;
+  color: var(--text-light);
+}
+
+.location-text {
+  background-color: var(--background-light);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-soft);
+  border-left: 4px solid var(--primary-color);
+}
+
+.location-text p {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Mapa */
+.map-container {
+  height: 100%;
+}
+
+.map-wrapper {
+  height: 100%;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+/* Seção de fotos */
+.photos-section {
+  padding: var(--spacing-lg) var(--spacing-md);
+  background-color: var(--background-dark);
+}
+
+.photos-section h2 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-card {
+  position: relative;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  background-color: var(--background-light);
+  height: 280px;
+  transition: var(--transition-standard);
+}
+
+.photo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: var(--transition-standard);
+}
+
+.photo-card:hover img {
+  transform: scale(1.05);
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-standard);
+}
+
+.photo-overlay span {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.photo-card:hover .photo-overlay {
+  opacity: 1;
+}
+
+.photo-caption {
+  padding: var(--spacing-xs);
+  text-align: center;
+}
+
+.photo-caption p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* Seção de transportes */
+.transportation-section {
+  padding: var(--spacing-lg) var(--spacing-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.transportation-section h2 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.transport-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.transport-card {
+  background-color: var(--background-light);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  transition: var(--transition-standard);
+}
+
+.transport-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.transport-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  margin: 0 auto var(--spacing-sm);
+}
+
+.transport-icon svg {
+  color: var(--primary-color);
+}
+
+.transport-card h3 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.3rem;
+}
+
+.transport-card p {
+  color: var(--text-light);
+}
+
+/* Modal para visualização de imagens */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.modal-content {
+  position: relative;
+  z-index: 1001;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-button {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1002;
+  transition: var(--transition-standard);
+}
+
+.close-button:hover {
+  transform: scale(1.1);
+  color: var(--accent-color);
+}
+
+.modal-image-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-image-container img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-medium);
+}
+
+.modal-caption {
+  color: white;
+  margin-top: var(--spacing-sm);
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.modal-nav {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: var(--transition-standard);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.prev {
+  margin-left: -25px;
+}
+
+.next {
+  margin-right: -25px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .map-wrapper {
+    height: 400px;
+  }
+  
+  .transport-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 400px;
+    background-attachment: scroll;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+  
+  .intro-section h2,
+  .photos-section h2,
+  .transportation-section h2 {
+    font-size: 2rem;
+  }
+  
+  .photos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .modal-nav {
+    position: relative;
+    margin-top: var(--spacing-sm);
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+  
+  .nav-button {
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    height: 300px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+  
+  .info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card-icon {
+    margin: 0 auto var(--spacing-sm);
+  }
+  
+  .photos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .transport-cards {
+    gap: var(--spacing-sm);
+  }
+  
+  .photo-card {
+    height: auto;
+  }
+  
+  .photo-card img {
+    height: 180px;
+  }
+  
+  .photo-overlay {
+    height: 180px;
+  }
+}
