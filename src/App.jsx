@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Pousada from './pages/Pousada';
 import Quartos from './pages/Quartos';
 import Localizacao from './pages/Localizacao';
+import Contato from './pages/Contato';
 
 // Importando os estilos separados
 import './styles/main.css';
@@ -13,6 +14,7 @@ import './styles/footer-styles.css';
 import './styles/pousada-styles.css';
 import './styles/quartos-styles.css';
 import './styles/localizacao-styles.css';
+import './styles/contato-styles.css';
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
           <Route path="/a-pousada" element={<Pousada />} />
           <Route path="/quartos" element={<Quartos />} />
           <Route path="/localizacao" element={<Localizacao />} />
-          {/* Add other routes as needed */}
+          <Route path="/contato" element={<Contato />} />
         </Routes>
         <Footer />
       </div>
