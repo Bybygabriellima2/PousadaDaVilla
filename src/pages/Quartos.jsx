@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import '../styles/quartos-styles.css';
 
 // Importe imagens dos quartos
@@ -134,7 +135,7 @@ function Quartos() {
           <div className="book-now">
             <h3>Venha se hospedar conosco!</h3>
             <p>Reserve já seu quarto e desfrute de momentos inesquecíveis em Fernando de Noronha, com o conforto e a hospitalidade da Pousada da Villa.</p>
-            <a href="/reservas" className="reservas-btn">Fazer Reserva</a>
+            <Link to="/contato" className="reservas-btn">Fazer Reserva</Link>
           </div>
         </div>
       </section>

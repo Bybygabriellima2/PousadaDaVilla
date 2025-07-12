@@ -1,4 +1,4 @@
-/* Estilos base e variáveis */
+/* src/styles/localizacao-styles.css */
 :root {
   --primary-color: #00817e;
   --primary-light: #e0f7f6;
@@ -21,20 +21,15 @@
   --font-family: 'Poppins', 'Helvetica', sans-serif;
 }
 
-/* Estilos globais */
-.localizacao-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+.localizacao-page-container {
   font-family: var(--font-family);
   color: var(--text-color);
   line-height: 1.6;
 }
 
-/* Hero Section com efeito Parallax */
 .hero-section {
   position: relative;
-  height: 500px;
+  height: 400px;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -50,7 +45,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
 }
 
 .hero-content {
@@ -63,7 +58,7 @@
 }
 
 .hero-content h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: var(--spacing-xs);
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -71,13 +66,12 @@
 }
 
 .hero-content p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
   margin-top: 0;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Seção de Introdução */
 .intro-section {
   text-align: center;
   max-width: 900px;
@@ -87,7 +81,7 @@
 
 .intro-section h2 {
   color: var(--primary-color);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: var(--spacing-xs);
 }
@@ -105,28 +99,35 @@
   line-height: 1.7;
 }
 
-/* Grid de conteúdo principal */
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+  gap: 2rem;
   margin: 0 auto var(--spacing-lg);
   padding: 0 var(--spacing-md);
   max-width: 1400px;
 }
 
-/* Informações de localização */
+@media (min-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
 .location-info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 1.5rem;
 }
 
+/* ESTILOS CORRIGIDOS PARA OS CARDS DE INFORMAÇÃO */
 .info-card {
   display: flex;
+  align-items: center;
+  gap: 1.5rem;
   background-color: var(--background-light);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
+  padding: 1.5rem;
   box-shadow: var(--shadow-soft);
   transition: var(--transition-standard);
 }
@@ -137,6 +138,7 @@
 }
 
 .card-icon {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,28 +146,34 @@
   height: 60px;
   border-radius: 50%;
   background-color: var(--primary-light);
-  margin-right: var(--spacing-md);
 }
 
 .card-icon svg {
   color: var(--primary-color);
 }
 
+.card-content {
+  flex-grow: 1;
+}
+
 .card-content h3 {
   color: var(--primary-color);
   margin-top: 0;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 0.5rem;
   font-size: 1.3rem;
+  font-weight: 600;
 }
 
 .card-content p {
-  margin: var(--spacing-xs) 0;
+  margin: 0;
   color: var(--text-light);
+  line-height: 1.6;
 }
+/* FIM DOS ESTILOS CORRIGIDOS */
 
 .location-text {
   background-color: var(--background-light);
-  padding: var(--spacing-md);
+  padding: 1.5rem;
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-soft);
   border-left: 4px solid var(--primary-color);
@@ -175,9 +183,9 @@
   margin-bottom: var(--spacing-sm);
 }
 
-/* Mapa */
 .map-container {
   height: 100%;
+  min-height: 400px; /* Garante altura mínima em telas menores */
 }
 
 .map-wrapper {
@@ -187,7 +195,13 @@
   box-shadow: var(--shadow-medium);
 }
 
-/* Seção de fotos */
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Seção de fotos e transporte (mantidas como estavam) */
 .photos-section {
   padding: var(--spacing-lg) var(--spacing-md);
   background-color: var(--background-dark);
@@ -217,13 +231,7 @@
   cursor: pointer;
   box-shadow: var(--shadow-soft);
   background-color: var(--background-light);
-  height: 280px;
   transition: var(--transition-standard);
-}
-
-.photo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-medium);
 }
 
 .photo-card img {
@@ -233,48 +241,12 @@
   transition: var(--transition-standard);
 }
 
-.photo-card:hover img {
-  transform: scale(1.05);
-}
-
-.photo-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 220px;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: var(--transition-standard);
-}
-
-.photo-overlay span {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.photo-card:hover .photo-overlay {
-  opacity: 1;
-}
-
 .photo-caption {
-  padding: var(--spacing-xs);
+  padding: 1rem;
   text-align: center;
-}
-
-.photo-caption p {
-  margin: 0;
   font-weight: 500;
-  color: var(--text-color);
 }
 
-/* Seção de transportes */
 .transportation-section {
   padding: var(--spacing-lg) var(--spacing-md);
   max-width: 1400px;
@@ -301,237 +273,59 @@
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-soft);
   text-align: center;
-  transition: var(--transition-standard);
-}
-
-.transport-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-medium);
 }
 
 .transport-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  margin: 0 auto 1rem;
+  width: 60px;
+  height: 60px;
   background-color: var(--primary-light);
-  margin: 0 auto var(--spacing-sm);
-}
-
-.transport-icon svg {
-  color: var(--primary-color);
-}
-
-.transport-card h3 {
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1.3rem;
-}
-
-.transport-card p {
-  color: var(--text-light);
-}
-
-/* Modal para visualização de imagens */
-.image-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  cursor: pointer;
-}
-
-.modal-content {
-  position: relative;
-  z-index: 1001;
-  width: 90%;
-  max-width: 1000px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.close-button {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  z-index: 1002;
-  transition: var(--transition-standard);
-}
-
-.close-button:hover {
-  transform: scale(1.1);
-  color: var(--accent-color);
-}
-
-.modal-image-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.modal-image-container img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-medium);
-}
-
-.modal-caption {
-  color: white;
-  margin-top: var(--spacing-sm);
-  text-align: center;
-  font-size: 1.1rem;
-}
-
-.modal-nav {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.nav-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  cursor: pointer;
-  transition: var(--transition-standard);
+  color: var(--primary-color);
 }
 
-.nav-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+/* Adicione este código ao seu arquivo localizacao-styles.css */
+
+/* === NOVOS ESTILOS PARA OS BLOCOS DE INFORMAÇÃO === */
+.info-block {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #eee;
 }
 
-.prev {
-  margin-left: -25px;
+.info-block-icon {
+  margin: 0 auto 1rem auto;
+  color: #00817e; /* Cor do ícone */
+  background-color: #e0f2f1; /* Fundo do ícone */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.next {
-  margin-right: -25px;
+.info-block-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333; /* Cor do título */
+  margin: 0 0 0.75rem 0;
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-  }
-  
-  .map-wrapper {
-    height: 400px;
-  }
-  
-  .transport-cards {
-    grid-template-columns: 1fr;
-  }
+.info-block-text {
+  font-size: 1.1rem;
+  color: #666; /* Cor do texto */
+  line-height: 1.6;
+  margin: 0;
 }
 
-@media (max-width: 768px) {
-  .hero-section {
-    height: 400px;
-    background-attachment: scroll;
-  }
-  
-  .hero-content h1 {
-    font-size: 3rem;
-  }
-  
-  .hero-content p {
-    font-size: 1.2rem;
-  }
-  
-  .intro-section h2,
-  .photos-section h2,
-  .transportation-section h2 {
-    font-size: 2rem;
-  }
-  
-  .photos-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-  
-  .modal-nav {
-    position: relative;
-    margin-top: var(--spacing-sm);
-    justify-content: center;
-    gap: var(--spacing-md);
-  }
-  
-  .nav-button {
-    margin: 0;
-  }
+.info-block-text strong {
+  color: #333; /* Cor do texto em negrito */
 }
-
-@media (max-width: 576px) {
-  .hero-section {
-    height: 300px;
-  }
-  
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-content p {
-    font-size: 1rem;
-  }
-  
-  .info-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .card-icon {
-    margin: 0 auto var(--spacing-sm);
-  }
-  
-  .photos-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .transport-cards {
-    gap: var(--spacing-sm);
-  }
-  
-  .photo-card {
-    height: auto;
-  }
-  
-  .photo-card img {
-    height: 180px;
-  }
-  
-  .photo-overlay {
-    height: 180px;
-  }
-}
+/* === FIM DOS NOVOS ESTILOS === */

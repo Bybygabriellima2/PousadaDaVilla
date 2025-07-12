@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/pousada-styles.css'; // Importe o CSS específico para a página da pousada
@@ -107,7 +106,7 @@ function Pousada() {
           <div className="container">
             <h2>Venha conhecer nossa pousada</h2>
             <p>Oferecemos a melhor experiência em Fernando de Noronha com conforto e autenticidade.</p>
-            <Link to="/reservas" className="cta-button">
+            <Link to="/contato" className="cta-button">
               Faça sua Reserva
               <i className="fas fa-arrow-right"></i>
             </Link>

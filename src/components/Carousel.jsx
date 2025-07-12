@@ -1,6 +1,7 @@
 // Carousel.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 // Importando as imagens diretamente
 import exteriorImage from '../assets/images/pousada-exterior.jpg';
 import roomImage from '../assets/images/pousada-room.jpg';
@@ -13,25 +14,28 @@ function Carousel() {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Slides com descrições corrigidas
+  // Slides com descrições corrigidas e links
   const slides = [
     {
       image: exteriorImage,
       title: 'POUSADA DA VILLA',
       subtitle: 'Seu refúgio de tranquilidade',
-      buttonText: 'Conheça'
+      buttonText: 'Conheça',
+      link: '/a-pousada'
     },
     {
       image: roomImage,
       title: 'QUARTOS CONFORTÁVEIS',
       subtitle: 'Conforto e elegância para sua estadia',
-      buttonText: 'Reservar'
+      buttonText: 'Reservar',
+      link: '/contato'
     },
     {
       image: beachImage,
       title: 'LOCALIZAÇÃO PRIVILEGIADA',
       subtitle: 'Uma experiência única',
-      buttonText: 'Explorar'
+      buttonText: 'Explorar',
+      link: '/localizacao'
     }
   ];
 
@@ -135,12 +139,12 @@ function Carousel() {
                   >
                     <span className="carousel-subtitle">{slide.subtitle}</span>
                     <h2>{slide.title}</h2>
-                    <button className="carousel-button">
+                    <Link to={slide.link} className="carousel-button">
                       <span>{slide.buttonText}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
-                    </button>
+                    </Link>
                   </motion.div>
                 </div>
               </motion.div>
@@ -148,8 +152,6 @@ function Carousel() {
           ))}
         </AnimatePresence>
       </div>
-      
-      {/* Removidos os botões de navegação e pontos indicadores */}
       
       <div className="carousel-counter">
         <span className="current">{String(currentSlide + 1).padStart(2, '0')}</span>

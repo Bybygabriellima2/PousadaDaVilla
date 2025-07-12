@@ -55,12 +55,12 @@ function Header() {
             <li><Link to="/a-pousada">A POUSADA</Link></li>
             <li><Link to="/quartos">QUARTOS</Link></li>
             <li><Link to="/localizacao">LOCALIZAÇÃO</Link></li>
-            <li><Link to="/tarifas">TARIFAS</Link></li>
+           {/* ...  <li><Link to="/tarifas">TARIFAS</Link></li>*/}
             <li><Link to="/contato">CONTATO</Link></li>
           </ul>
         </nav>
         
-        <Link to="/reservas" className="reservas-btn">RESERVAS</Link>
+        <Link to="/contato" className="reservas-btn">RESERVAS</Link>
         
         <div 
           className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`} 
@@ -91,7 +91,7 @@ function Header() {
             <li><Link to="/tarifas" onClick={closeMobileMenu}>TARIFAS</Link></li>
             <li><Link to="/contato" onClick={closeMobileMenu}>CONTATO</Link></li>
           </ul>
-          <Link to="/reservas" className="mobile-reservas-btn" onClick={closeMobileMenu}>
+          <Link to="/contato" className="mobile-reservas-btn" onClick={closeMobileMenu}>
             RESERVAS
           </Link>
         </div>

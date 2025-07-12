@@ -1,5 +1,6 @@
 // InfoSection.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // 1. Importe o componente Link
 import '../styles/InfoSection.css';
 // Importando imagens
 import gardenImage from '../assets/images/pousada-garden.jpg';
@@ -31,19 +32,22 @@ function InfoSection() {
       image: gardenImage,
       alt: "Área externa da pousada",
       title: "A POUSADA",
-      text: "Oferece conforto e um conceito rústico/contemporâneo, é decorada com arte e artesanato brasileiro, possui um belo jardim e um excelente café da manhã."
+      text: "Oferece conforto e um conceito rústico/contemporâneo, é decorada com arte e artesanato brasileiro, possui um belo jardim e um excelente café da manhã.",
+      link: "/a-pousada" // 2. Adicione a propriedade 'link' para cada card
     },
     {
       image: roomInteriorImage,
       alt: "Quarto da pousada",
       title: "QUARTOS",
-      text: "São 11 quartos equipados com ar condicionado, frigobar, cama BOX, TV a cabo, banheiro privativo com banho quente, secador de cabelo e amenities Natura. O enxoval é em algodão egípcio 100%."
+      text: "São 11 quartos equipados com ar condicionado, frigobar, cama BOX, TV a cabo, banheiro privativo com banho quente, secador de cabelo e amenities Natura. O enxoval é em algodão egípcio 100%.",
+      link: "/quartos" // 2. Adicione a propriedade 'link' para cada card
     },
     {
       image: beachViewImage,
       alt: "Praia de Fernando de Noronha",
       title: "LOCALIZAÇÃO",
-      text: "A pousada está localizada na Ilha de Fernando de Noronha, na Villa do Trinta, próxima a restaurantes, mercados e outras conveniências."
+      text: "A pousada está localizada na Ilha de Fernando de Noronha, na Villa do Trinta, próxima a restaurantes, mercados e outras conveniências.",
+      link: "/localizacao" // 2. Adicione a propriedade 'link' para cada card
     }
   ];
 
@@ -73,7 +77,10 @@ function InfoSection() {
               <div className="title-underline"></div>
               <p className="info-text">{card.text}</p>
               <div className="info-button">
-                <button className="learn-more">Saiba mais</button>
+                {/* 3. Substitua o <button> por <Link> */}
+                <Link to={card.link} className="learn-more">
+                  Saiba mais
+                </Link>
               </div>
             </div>
           </div>
