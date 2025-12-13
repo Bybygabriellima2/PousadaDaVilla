@@ -112,7 +112,8 @@ const Localizacao = () => {
                 scrolling="no"
                 marginHeight="0"
                 marginWidth="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-32.42448%2C-3.85172%2C-32.42031%2C-3.84966&amp;layer=mapnik&amp;marker=-3.85069%2C-32.42239"
+                // ATUALIZADO AQUI: Novas coordenadas para Rua Pinto Branco 206
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-32.408847%2C-3.848428%2C-32.404847%2C-3.844428&amp;layer=mapnik&amp;marker=-3.846428%2C-32.406847"
                 title="Mapa da localização da Pousada da Villa"
             ></iframe>
           </div>

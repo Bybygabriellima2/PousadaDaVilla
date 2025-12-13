@@ -97,8 +97,8 @@ function Quartos() {
             <div className="quarto-card">
               <img src={quartoTriploBanner} alt="Quarto Triplo da Pousada da Villa" />
               <div className="quarto-info">
-                <h2>Quarto duplo</h2>
-                <p>Quarto espaçoso com duas camas de solteiro, ideal para grupos de amigos ou famílias. Conta com todo o conforto e comodidades da pousada, com vista privilegiada para o jardim.</p>
+                <h2>Quarto Misto</h2>
+                <p>Quarto espaçoso com camas mistas, ideal para grupos de amigos ou famílias. Conta com todo o conforto e comodidades da pousada, com vista privilegiada para o jardim.</p>
                 <ul className="amenities-list">
                   {standardAmenities.map((amenity, index) => (
                     <li key={index}>{amenity}</li>

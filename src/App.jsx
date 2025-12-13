@@ -7,6 +7,7 @@ import Pousada from './pages/Pousada';
 import Quartos from './pages/Quartos';
 import Localizacao from './pages/Localizacao';
 import Contato from './pages/Contato';
+import ScrollToTop from './components/ScrollToTop';
 
 // Importando os estilos separados
 import './styles/main.css';
@@ -19,6 +20,7 @@ import './styles/contato-styles.css';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="app">
         <Header />
         <Routes>

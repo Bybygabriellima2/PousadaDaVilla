@@ -160,12 +160,7 @@ function Carousel() {
       </div>
       
       <div className="carousel-social">
-        <a href="#" className="social-icon" aria-label="Facebook">
-          <i className="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" className="social-icon" aria-label="Instagram">
-          <i className="fab fa-instagram"></i>
-        </a>
+     
         <a href="#" className="social-icon" aria-label="WhatsApp">
           <i className="fab fa-whatsapp"></i>
         </a>
