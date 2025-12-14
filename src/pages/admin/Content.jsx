@@ -1,5 +1,6 @@
+// src/pages/admin/Content.jsx
 import React from 'react';
-import { Edit, Eye } from 'lucide-react';
+import { Edit, Eye, Plus } from 'lucide-react';
 
 const Content = () => {
   const pages = [
@@ -14,45 +15,49 @@ const Content = () => {
     <div>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'2rem'}}>
         <h2 style={{color: '#1e293b', margin:0}}>Gerenciar Conteúdo</h2>
-        <button className="admin-btn" style={{width:'auto'}}> - ocultar pagina</button>
+        <button className="admin-btn" style={{width:'auto', display:'flex', alignItems:'center', gap:'5px'}}>
+            <Plus size={18}/> <span style={{display: 'inline-block'}}>Nova Página</span>
+        </button>
       </div>
 
-      <div className="config-section" style={{padding: '0'}}>
-        <div style={{overflowX: 'auto'}}>
-          <table style={{width: '100%', borderCollapse: 'collapse', minWidth: '600px'}}>
+      <div className="config-section" style={{padding: '0', overflow: 'hidden'}}>
+          <table className="responsive-table">
             <thead>
-              <tr style={{background: '#f8fafc', borderBottom: '1px solid #e2e8f0', textAlign: 'left'}}>
-                <th style={{padding: '1rem'}}>Título da Página</th>
-                <th style={{padding: '1rem'}}>Última Edição</th>
-                <th style={{padding: '1rem'}}>Status</th>
-                <th style={{padding: '1rem', textAlign:'right'}}>Ações</th>
+              <tr>
+                <th>Título da Página</th>
+                <th>Última Edição</th>
+                <th>Status</th>
+                <th style={{textAlign:'right'}}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {pages.map(page => (
-                <tr key={page.id} style={{borderBottom: '1px solid #f1f5f9'}}>
-                  <td style={{padding: '1rem', fontWeight:'500'}}>{page.title}</td>
-                  <td style={{padding: '1rem', color:'#64748b'}}>{page.lastEdit}</td>
-                  <td style={{padding: '1rem'}}>
+                <tr key={page.id}>
+                  <td data-label="Título" style={{fontWeight:'500'}}>{page.title}</td>
+                  <td data-label="Última Edição" style={{color:'#64748b'}}>{page.lastEdit}</td>
+                  <td data-label="Status">
                     <span style={{
-                      padding: '0.25rem 0.5rem', 
+                      padding: '0.25rem 0.75rem', 
                       borderRadius: '20px', 
                       fontSize: '0.8rem',
+                      fontWeight: '500',
                       background: page.status === 'Publicado' ? '#dcfce7' : '#f1f5f9',
-                      color: page.status === 'Publicado' ? '#166534' : '#475569'
+                      color: page.status === 'Publicado' ? '#166534' : '#475569',
+                      display: 'inline-block'
                     }}>
                       {page.status}
                     </span>
                   </td>
-                  <td style={{padding: '1rem', textAlign:'right'}}>
-                    <button className="btn-sm btn-edit" style={{marginRight:'5px'}} title="Editar"><Edit size={16}/></button>
-                    <button className="btn-sm" style={{background:'#f1f5f9', color:'#475569'}} title="Ver"><Eye size={16}/></button>
+                  <td data-label="Ações" style={{textAlign:'right'}}>
+                    <div style={{display: 'flex', justifyContent: 'flex-end', gap: '8px'}}>
+                        <button className="btn-sm btn-edit" title="Editar"><Edit size={16}/></button>
+                        <button className="btn-sm" style={{background:'#f1f5f9', color:'#475569'}} title="Ver"><Eye size={16}/></button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
       </div>
     </div>
   );
