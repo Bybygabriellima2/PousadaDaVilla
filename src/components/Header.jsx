@@ -8,6 +8,7 @@ import '../styles/header-styles.css';
 function Header() {
   const { config } = useContext(ConfigContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   const location = useLocation();
 
   // Logo source com fallback
@@ -17,10 +18,26 @@ function Header() {
         : `http://localhost:3001${config.site_logo}`) 
     : defaultLogo;
 
+  // Detecta mudança de tamanho de tela
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 992;
+      setIsMobile(mobile);
+      if (!mobile && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileMenuOpen]);
+
   // Fecha menu ao redimensionar para desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 992 && mobileMenuOpen) {
+      const mobile = window.innerWidth < 992;
+      setIsMobile(mobile);
+      if (!mobile && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
@@ -122,23 +139,25 @@ function Header() {
           RESERVAS
         </Link>
         
-        {/* Hamburger Menu */}
-        <button 
-          className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`} 
-          onClick={toggleMobileMenu}
-          aria-label="Menu de navegação"
-          aria-expanded={mobileMenuOpen}
-          aria-controls="mobile-menu"
-          type="button"
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
+        {/* Hamburger Menu - Só renderiza em mobile */}
+        {isMobile && (
+          <button 
+            className={`hamburger-menu ${mobileMenuOpen ? 'open' : ''}`} 
+            onClick={toggleMobileMenu}
+            aria-label="Menu de navegação"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+            type="button"
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
+        )}
       </div>
 
-      {/* Mobile Overlay */}
-      {mobileMenuOpen && (
+      {/* Mobile Overlay - Só renderiza em mobile */}
+      {isMobile && mobileMenuOpen && (
         <div 
           className="mobile-overlay" 
           onClick={closeMobileMenu}
@@ -146,50 +165,52 @@ function Header() {
         />
       )}
       
-      {/* Mobile Navigation */}
-      <nav 
-        id="mobile-menu"
-        className={`nav-mobile ${mobileMenuOpen ? 'open' : ''}`}
-        aria-label="Menu mobile"
-      >
-        <div className="nav-mobile-content">
-          <ul className="nav-list-mobile">
-            <li>
-              <Link to="/" onClick={closeMobileMenu}>
-                HOME
-              </Link>
-            </li>
-            <li>
-              <Link to="/a-pousada" onClick={closeMobileMenu}>
-                A POUSADA
-              </Link>
-            </li>
-            <li>
-              <Link to="/quartos" onClick={closeMobileMenu}>
-                QUARTOS
-              </Link>
-            </li>
-            <li>
-              <Link to="/localizacao" onClick={closeMobileMenu}>
-                LOCALIZAÇÃO
-              </Link>
-            </li>
-            <li>
-              <Link to="/contato" onClick={closeMobileMenu}>
-                CONTATO
-              </Link>
-            </li>
-          </ul>
-          
-          <Link 
-            to="/contato" 
-            className="mobile-reservas-btn" 
-            onClick={closeMobileMenu}
-          >
-            <span>FAZER RESERVA</span>
-          </Link>
-        </div>
-      </nav>
+      {/* Mobile Navigation - Só renderiza em mobile */}
+      {isMobile && (
+        <nav 
+          id="mobile-menu"
+          className={`nav-mobile ${mobileMenuOpen ? 'open' : ''}`}
+          aria-label="Menu mobile"
+        >
+          <div className="nav-mobile-content">
+            <ul className="nav-list-mobile">
+              <li>
+                <Link to="/" onClick={closeMobileMenu}>
+                  HOME
+                </Link>
+              </li>
+              <li>
+                <Link to="/a-pousada" onClick={closeMobileMenu}>
+                  A POUSADA
+                </Link>
+              </li>
+              <li>
+                <Link to="/quartos" onClick={closeMobileMenu}>
+                  QUARTOS
+                </Link>
+              </li>
+              <li>
+                <Link to="/localizacao" onClick={closeMobileMenu}>
+                  LOCALIZAÇÃO
+                </Link>
+              </li>
+              <li>
+                <Link to="/contato" onClick={closeMobileMenu}>
+                  CONTATO
+                </Link>
+              </li>
+            </ul>
+            
+            <Link 
+              to="/contato" 
+              className="mobile-reservas-btn" 
+              onClick={closeMobileMenu}
+            >
+              <span>FAZER RESERVA</span>
+            </Link>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

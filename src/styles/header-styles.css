@@ -137,6 +137,13 @@
   flex-shrink: 0;
 }
 
+/* IMPORTANTE: Esconder no desktop por padrão */
+@media (min-width: 992px) {
+  .hamburger-menu {
+    display: none !important;
+  }
+}
+
 .hamburger-menu:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }

@@ -172,3 +172,47 @@ body {
 h1, h2 {
   color: var(--primary-color);
 }
+
+/* ================================================
+   ADICIONE ISSO NO INÍCIO DO SEU src/styles/main.css
+   ================================================ */
+
+/* Previne scroll horizontal e quebra de layout no mobile */
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* Previne qualquer elemento de causar scroll horizontal */
+* {
+  max-width: 100%;
+}
+
+/* Container principal do app */
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+/* Previne imagens de quebrar layout */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ================================================
+   FIM DAS REGRAS DE OVERFLOW
+   ================================================ */
