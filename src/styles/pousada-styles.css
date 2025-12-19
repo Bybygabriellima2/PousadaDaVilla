@@ -376,7 +376,6 @@ h2::after {
 .feature-item:hover h3 {
   color: var(--primary-color);
 }
-
 /* CTA */
 .pousada-cta {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../assets/images/pousada-room.jpg');
@@ -404,6 +403,7 @@ h2::after {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  color: #ffffff !important; /* FORÇADO: Garante que o texto seja branco */
 }
 
 .cta-button {
@@ -435,7 +435,6 @@ h2::after {
 .cta-button:hover i {
   transform: translateX(5px);
 }
-
 /* Footer adapta do código fornecido */
 .footer {
   background-color: var(--primary-color);
