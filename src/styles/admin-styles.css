@@ -85,6 +85,7 @@
 /* --- LAYOUT --- */
 .admin-layout { display: flex; min-height: 100vh; position: relative; }
 
+/* CORREÇÃO AQUI: Aumentamos o z-index para 1000 para garantir que fique acima de tudo */
 .admin-sidebar {
   width: var(--sidebar-width);
   background-color: var(--admin-primary);
@@ -93,7 +94,7 @@
   flex-direction: column;
   position: fixed;
   height: 100%;
-  z-index: 50;
+  z-index: 1000; 
   transition: transform 0.3s ease;
 }
 
@@ -129,6 +130,7 @@
   flex-direction: column;
   min-height: 100vh;
   transition: margin-left 0.3s ease;
+  width: 100%; /* Garante que o conteúdo ocupe a largura correta */
 }
 
 .admin-header {
@@ -175,25 +177,9 @@
   border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem;
 }
 
-/* Customize Page Styles */
+/* Customize Page Styles Helpers */
 .color-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;
-}
-.color-preview { display: flex; align-items: center; gap: 10px; }
-.color-preview input[type="color"] {
-  width: 50px; height: 50px; border: none; border-radius: 8px; cursor: pointer; padding: 0; -webkit-appearance: none;
-}
-.color-preview input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-.color-preview input[type="color"]::-webkit-color-swatch { border: none; border-radius: 8px; }
-.color-preview input[type="text"] {
-  border: 1px solid #cbd5e1; padding: 0.5rem; border-radius: 6px; width: 100px;
-}
-
-.save-bar { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
-.toast {
-  position: fixed; bottom: 20px; right: 20px; background-color: #10b981; color: white;
-  padding: 1rem 2rem; border-radius: 8px; animation: slideIn 0.3s ease-out;
-  display: flex; align-items: center; gap: 10px; z-index: 100;
 }
 
 /* --- TABELAS RESPONSIVAS --- */
@@ -226,16 +212,17 @@
 .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;}
 .card-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
 
+/* CORREÇÃO AQUI: Overlay com z-index alto logo abaixo do sidebar */
 .sidebar-overlay {
   display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5); z-index: 45;
+  background: rgba(0,0,0,0.5); z-index: 990;
 }
 
 /* --- MEDIA QUERIES (MOBILE) --- */
 @media (max-width: 768px) {
   .admin-sidebar { transform: translateX(-100%); }
   .admin-sidebar.open { transform: translateX(0); }
-  .admin-content { margin-left: 0; }
+  .admin-content { margin-left: 0; width: 100%; }
   .mobile-toggle, .close-sidebar-btn, .sidebar-overlay.show { display: block; }
   .admin-main { padding: 1rem; }
   
@@ -245,7 +232,7 @@
   
   .admin-header { padding: 1rem; }
   
-  /* Transformar Tabela em Cards no Mobile */
+  /* Tabela Mobile */
   .responsive-table thead { display: none; }
   .responsive-table, .responsive-table tbody, .responsive-table tr, .responsive-table td {
     display: block; width: 100%;
@@ -261,15 +248,12 @@
   }
   .responsive-table td:last-child { border-bottom: none; justify-content: flex-end; gap: 10px; margin-top: 0.5rem; }
   
-  /* Pseudo-elemento para label no mobile */
   .responsive-table td::before {
     content: attr(data-label);
     font-weight: 600; color: #64748b; font-size: 0.9rem; text-align: left;
   }
-
-  .save-bar { flex-direction: column-reverse; }
 }
 
 @media (max-width: 480px) {
-  .content-grid { grid-template-columns: 1fr; } /* Galeria 1 coluna em telas muito pequenas */
+  .content-grid { grid-template-columns: 1fr; } 
 }

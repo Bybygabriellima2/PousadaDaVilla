@@ -1,132 +1,171 @@
-/* Header Styles */
+/* src/styles/header-styles.css - VERSÃO MOBILE CORRIGIDA */
+
+/* Reset e Base */
+* {
+  box-sizing: border-box;
+}
+
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
-  background-color: #006f72;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--header-bg-color, #0d9488);
+  box-shadow: var(--header-shadow, 0 4px 12px rgba(0,0,0,0.08));
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  width: 100%;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 100%);
+  pointer-events: none;
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 20px;
-  position: relative; /* Adicionado para estabelecer contexto de posicionamento */
-}
-
-.logo-container {
-  width: 160px;
+  padding: 12px 16px;
   position: relative;
-  z-index: 150; /* Modificado: z-index menor que o hamburger menu */
+  gap: 12px;
 }
 
-@media (min-width: 768px) {
-  .logo-container {
-    width: 200px;
-  }
+/* Logo */
+.logo-container {
+  width: var(--logo-mobile-width, 120px);
+  position: relative;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
+.logo-container:hover {
+  transform: scale(1.02);
 }
 
-/* Desktop Navigation */
-.nav-desktop {
+.logo { 
+  width: 100%; 
+  height: auto; 
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Desktop Navigation - Hidden on Mobile */
+.nav-desktop { 
   display: none;
-}
-
-@media (min-width: 992px) {
-  .nav-desktop {
-    display: block;
-    flex-grow: 1;
-    margin-left: 20px;
-  }
 }
 
 .nav-list {
   display: flex;
   list-style: none;
   justify-content: center;
-  gap: 20px;
+  gap: 8px;
   padding: 0;
   margin: 0;
 }
 
+.nav-list li {
+  position: relative;
+}
+
 .nav-list li a {
-  color: white;
+  color: var(--header-text-color, #ffffff);
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  letter-spacing: 0.8px;
+  padding: 10px 16px;
+  display: block;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nav-list li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--header-hover-color, #f1c40f);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 .nav-list li a:hover {
-  color: #f1c40f;
+  color: var(--header-hover-color, #f1c40f);
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
 }
 
-/* Reservas Button */
+.nav-list li a:hover::before {
+  width: 60%;
+}
+
+/* Desktop Reservas Button - Hidden on Mobile */
 .reservas-btn {
-  background-color: white;
-  color: #006f72;
-  padding: 10px 20px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 3px;
-  transition: background-color 0.3s;
-  white-space: nowrap;
-  position: relative;
-  z-index: 150; /* Mesmo z-index do logo */
+  display: none;
 }
 
-.reservas-btn:hover {
-  background-color: #f1c40f;
-}
-
-/* Hamburger Menu Button */
+/* Hamburger Menu - Mobile Only */
 .hamburger-menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   position: relative;
-  z-index: 200; /* Modificado: valor maior para garantir que fique acima do logo */
+  z-index: 200;
   cursor: pointer;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-@media (min-width: 992px) {
-  .hamburger-menu {
-    display: none;
-  }
+.hamburger-menu:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hamburger-menu:active {
+  transform: scale(0.95);
 }
 
 .hamburger-line {
   display: block;
-  width: 24px;
-  height: 2px;
-  background-color: white;
-  transition: all 0.3s;
-  margin-bottom: 6px;
+  width: 22px;
+  height: 2.5px;
+  background-color: var(--header-text-color, #ffffff);
+  transition: all 0.3s ease;
+  margin: 3px 0;
+  border-radius: 2px;
 }
 
-.hamburger-line:last-child {
-  margin-bottom: 0;
+.hamburger-menu.open .hamburger-line:nth-child(1) { 
+  transform: translateY(8.5px) rotate(45deg); 
 }
 
-/* Animação do menu hambúrguer */
-.hamburger-menu.open .hamburger-line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+.hamburger-menu.open .hamburger-line:nth-child(2) { 
+  opacity: 0; 
+  transform: translateX(-10px);
 }
 
-.hamburger-menu.open .hamburger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-menu.open .hamburger-line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+.hamburger-menu.open .hamburger-line:nth-child(3) { 
+  transform: translateY(-8.5px) rotate(-45deg); 
 }
 
 /* Mobile Menu Overlay */
@@ -136,10 +175,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 90;
-  opacity: 1;
-  transition: opacity 0.3s;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 180;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+  touch-action: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Mobile Navigation */
@@ -147,70 +192,391 @@
   position: fixed;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 256px;
-  background-color: #006f72;
-  z-index: 190; /* Modificado: menor que o hamburger-menu para fechamento */
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+  width: 280px;
+  max-width: 85vw;
+  background: linear-gradient(135deg, var(--header-bg-color, #0d9488) 0%, rgba(13, 148, 136, 0.98) 100%);
+  z-index: 190;
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.4);
   overflow-y: auto;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-x: hidden;
 }
 
-.nav-mobile.open {
-  transform: translateX(0);
+/* Garantir que menu mobile não apareça em desktop */
+@media (min-width: 992px) {
+  .nav-mobile,
+  .mobile-overlay,
+  .hamburger-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 }
 
-.nav-mobile-content {
-  padding-top: 80px;
-  padding-bottom: 24px;
-  padding-left: 16px;
-  padding-right: 16px;
+.nav-mobile.open { 
+  transform: translateX(0); 
 }
 
-.nav-list-mobile {
+.nav-mobile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.nav-mobile-content { 
+  padding: 80px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.nav-list-mobile { 
   list-style: none;
   padding: 0;
   margin: 0;
+  flex: 1;
 }
 
-.nav-list-mobile li {
-  margin-bottom: 16px;
+.nav-list-mobile li { 
+  margin-bottom: 6px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
 .nav-list-mobile li a {
-  display: block;
-  color: white;
+  display: flex;
+  align-items: center;
+  color: var(--header-text-color, #ffffff);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  letter-spacing: 0.5px;
+  border-left: 3px solid transparent;
 }
 
-.nav-list-mobile li a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.nav-list-mobile li a:active {
+  transform: scale(0.98);
+}
+
+.nav-list-mobile li a:hover,
+.nav-list-mobile li a:active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--header-hover-color, #f1c40f);
+  padding-left: 22px;
+  border-left-color: var(--header-hover-color, #f1c40f);
 }
 
 .mobile-reservas-btn {
   display: block;
-  background-color: white;
-  color: #006f72;
   text-align: center;
-  font-weight: bold;
-  padding: 12px 16px;
-  border-radius: 4px;
+  background: linear-gradient(135deg, var(--header-text-color, #ffffff) 0%, rgba(255,255,255,0.95) 100%);
+  color: var(--header-bg-color, #0d9488);
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
   text-decoration: none;
-  margin-top: 24px;
-  transition: background-color 0.3s;
-}
-
-.mobile-reservas-btn:hover {
-  background-color: #f1c40f;
-}
-
-/* Body Lock (to prevent scrolling when menu is open) */
-body.menu-open {
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  position: relative;
   overflow: hidden;
+}
+
+.mobile-reservas-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-reservas-btn:active {
+  transform: scale(0.98);
+}
+
+.mobile-reservas-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--header-hover-color, #f1c40f);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+.mobile-reservas-btn:hover::before,
+.mobile-reservas-btn:active::before {
+  width: 300%;
+  height: 300%;
+}
+
+.mobile-reservas-btn:hover,
+.mobile-reservas-btn:active {
+  color: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open { 
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Small Mobile (320px - 480px) */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 10px 12px;
+  }
+  
+  .logo-container {
+    width: var(--logo-mobile-width, 100px);
+  }
+  
+  .nav-mobile {
+    width: 260px;
+  }
+  
+  .nav-list-mobile li a {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+  
+  .mobile-reservas-btn {
+    font-size: 14px;
+    padding: 13px 18px;
+  }
+}
+
+/* Medium Mobile (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .header-container {
+    padding: 12px 16px;
+  }
+  
+  .logo-container {
+    width: var(--logo-mobile-width, 130px);
+  }
+}
+
+/* Tablet (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .header-container {
+    padding: 14px 20px;
+  }
+  
+  .logo-container {
+    width: var(--logo-mobile-width, 150px);
+  }
+  
+  .nav-mobile {
+    width: 320px;
+  }
+}
+
+/* Desktop (992px+) */
+@media (min-width: 992px) {
+  .header-container {
+    padding: 16px 24px;
+  }
+  
+  .logo-container { 
+    width: var(--logo-width, 180px); 
+  }
+  
+  .nav-desktop {
+    display: block;
+    flex-grow: 1;
+    margin-left: 30px;
+  }
+  
+  .reservas-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--header-text-color, #ffffff) 0%, rgba(255,255,255,0.9) 100%);
+    color: var(--header-bg-color, #0d9488);
+    padding: 11px 24px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+    z-index: 150;
+    font-size: 0.88rem;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+  }
+  
+  .reservas-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--header-hover-color, #f1c40f);
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .reservas-btn:hover::before {
+    opacity: 1;
+  }
+  
+  .reservas-btn:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    border-color: var(--header-hover-color, #f1c40f);
+  }
+  
+  /* CRÍTICO: Esconder completamente menu mobile e hamburger no desktop */
+  .hamburger-menu { 
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  
+  .nav-mobile {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateX(100%) !important;
+  }
+  
+  .mobile-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+  
+  /* Garantir que body não fique bloqueado no desktop */
+  body.menu-open {
+    overflow: auto !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .header-container {
+    padding: 18px 32px;
+  }
+  
+  .logo-container { 
+    width: var(--logo-width, 200px); 
+  }
+  
+  .nav-desktop {
+    margin-left: 40px;
+  }
+  
+  .nav-list {
+    gap: 12px;
+  }
+  
+  .nav-list li a {
+    padding: 11px 18px;
+    font-size: 0.95rem;
+  }
+  
+  .reservas-btn {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+  .nav-list {
+    gap: 16px;
+  }
+  
+  .nav-list li a {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Landscape Mobile Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .nav-mobile-content {
+    padding: 60px 20px 20px;
+  }
+  
+  .nav-list-mobile li a {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .mobile-reservas-btn {
+    padding: 12px 18px;
+    margin-top: 15px;
+  }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hamburger-menu {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .nav-list-mobile li a {
+    min-height: 48px;
+  }
+  
+  .mobile-reservas-btn {
+    min-height: 48px;
+  }
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .nav-mobile {
+    transition: none;
+  }
+  
+  .mobile-overlay {
+    animation: none;
+  }
 }

@@ -1,6 +1,13 @@
+
+// ======================================
+// src/pages/admin/AdminLayout.jsx - ATUALIZADO
+// ======================================
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Image, Type, Palette, Settings, LogOut, Home, Menu, X } from 'lucide-react';
+import { 
+  LayoutDashboard, Image, Type, Palette, Settings, LogOut, 
+  Home, Menu, X, FileText, Layout as LayoutIcon 
+} from 'lucide-react';
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,13 +24,11 @@ const AdminLayout = () => {
 
   return (
     <div className="admin-body admin-layout">
-      {/* Overlay para Mobile */}
       <div 
         className={`sidebar-overlay ${isSidebarOpen ? 'show' : ''}`} 
         onClick={closeSidebar}
       ></div>
 
-      {/* Sidebar */}
       <aside className={`admin-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
            <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
@@ -36,21 +41,22 @@ const AdminLayout = () => {
         </div>
         
         <nav className="sidebar-menu">
-          <Link to="/admin/dashboard" onClick={closeSidebar} className={`menu-item ${isActive('/admin/dashboard')}`}>
-            <LayoutDashboard /> Dashboard
-          </Link>
           <Link to="/admin/customize" onClick={closeSidebar} className={`menu-item ${isActive('/admin/customize')}`}>
             <Palette /> Aparência
           </Link>
-          <Link to="/admin/content" onClick={closeSidebar} className={`menu-item ${isActive('/admin/content')}`}>
-            <Type /> Conteúdo
+          <Link to="/admin/texts" onClick={closeSidebar} className={`menu-item ${isActive('/admin/texts')}`}>
+            <FileText /> Textos do Site
+          </Link>
+          <Link to="/admin/images" onClick={closeSidebar} className={`menu-item ${isActive('/admin/images')}`}>
+            <Image /> Imagens do Site
           </Link>
           <Link to="/admin/gallery" onClick={closeSidebar} className={`menu-item ${isActive('/admin/gallery')}`}>
             <Image /> Galeria
           </Link>
-          <Link to="/admin/settings" onClick={closeSidebar} className={`menu-item ${isActive('/admin/settings')}`}>
-            <Settings /> Configurações
+          <Link to="/admin/pages" onClick={closeSidebar} className={`menu-item ${isActive('/admin/pages')}`}>
+            <LayoutIcon /> Páginas
           </Link>
+
         </nav>
 
         <div style={{padding: '1rem'}}>
@@ -60,7 +66,6 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="admin-content">
         <header className="admin-header">
           <div style={{display:'flex', alignItems:'center', gap:'1rem'}}>

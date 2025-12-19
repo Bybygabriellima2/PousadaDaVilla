@@ -1,14 +1,25 @@
-import React from 'react';
+// src/components/Footer.jsx - CORRIGIDO
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// Você precisará de um arquivo CSS para estilizar este componente.
-// Ex: import './FooterStyles.css'; 
+import { ConfigContext } from '../contexts/ConfigContext';
+import '../styles/footer-styles.css'; // <--- ESTA LINHA É ESSENCIAL PARA O DESIGN FUNCIONAR
 
 function Footer() {
+  const { config } = useContext(ConfigContext);
   const currentYear = new Date().getFullYear();
+  
+  const getText = (key, defaultText) => config[key] || defaultText;
+
+  // Estilos dinâmicos injetados via CSS Variables
+  const footerStyles = {
+    '--footer-bg-color': config.footer_bg_color || '#00857c',
+    '--footer-text-color': config.footer_text_color || '#ffffff',
+    '--footer-link-hover': config.footer_link_hover || '#f1c40f',
+    '--background-color': config.background_color || '#f5f0e4'
+  };
 
   return (
-    <footer className="footer">
-      {/* A onda SVG no topo cria um efeito visual de transição */}
+    <footer className="footer" style={footerStyles}>
       <div className="footer-wave">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,120 Q150,60 300,90 T600,80 T900,70 T1200,60 L1200,120 L0,120 Z" fill="currentColor"/>
@@ -17,57 +28,58 @@ function Footer() {
       
       <div className="footer-container">
         <div className="footer-brand">
-          <h2 className="footer-logo">Pousada da Villa</h2>
-          <p className="footer-tagline">Sua experiência única em Fernando de Noronha</p>
+          <h2 className="footer-logo">
+            {getText('footer_brand_title', 'Pousada da Villa')}
+          </h2>
+          <p className="footer-tagline">
+            {getText('footer_tagline', 'Sua experiência única em Fernando de Noronha')}
+          </p>
         </div>
 
         <div className="footer-content">
-          {/* Seção de Localização */}
           <div className="footer-section">
             <div className="section-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5-2.5-1.12 2.5-2.5 2.5z"/>
               </svg>
             </div>
-            <h3>Localização</h3>
+            <h3>{getText('footer_location_title', 'Localização')}</h3>
             <div className="section-content">
-              <p>Rua Pinto Branco 206, Vila do Trinta</p>
-              <p>Fernando de Noronha, CEP 53990-000</p>
-              <p>Brasil</p>
+              <p>{getText('footer_location_line1', 'Rua Pinto Branco 206, Vila do Trinta')}</p>
+              <p>{getText('footer_location_line2', 'Fernando de Noronha, CEP 53990-000')}</p>
+              <p>{getText('footer_location_line3', 'Brasil')}</p>
             </div>
           </div>
 
-          {/* Seção de Contato */}
           <div className="footer-section">
             <div className="section-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
               </svg>
             </div>
-            <h3>Contato</h3>
+            <h3>{getText('footer_contact_title', 'Contato')}</h3>
             <div className="section-content">
               <p className="contact-item">
                 <span className="contact-label">Fone:</span>
-                {/* Links externos (tel, mailto, https) usam <a> */}
-                <a href="tel:+558132244476">(81) 3224-4476</a>
+                <a href="tel:+558132244476">{getText('footer_phone', '(81) 3224-4476')}</a>
               </p>
               <p className="contact-item">
                 <span className="contact-label">WhatsApp:</span>
-                <a href="https://wa.me/5581982307332" target="_blank" rel="noopener noreferrer">(81) 98230-7332</a>
+                <a href="https://wa.me/5581982307332" target="_blank" rel="noopener noreferrer">
+                  {getText('footer_whatsapp', '(81) 98230-7332')}
+                </a>
               </p>
             </div>
           </div>
 
-          {/* Seção de Navegação Interna */}
           <div className="footer-section">
             <div className="section-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
               </svg>
             </div>
-            <h3>Navegação</h3>
+            <h3>{getText('footer_navigation_title', 'Navegação')}</h3>
             <nav className="footer-nav">
-              {/* Links internos usam <Link> para navegação rápida */}
               <Link to="/" className="nav-link">Home</Link>
               <Link to="/a-pousada" className="nav-link">A Pousada</Link>
               <Link to="/quartos" className="nav-link">Quartos</Link>
@@ -81,8 +93,10 @@ function Footer() {
 
         <div className="footer-bottom">
           <div className="footer-copyright">
-            <p>&copy; {currentYear} Pousada da Villa. Todos os direitos reservados.</p>
-            <p className="footer-subtitle">Desenvolvido com carinho para sua estadia perfeita</p>
+            <p>&copy; {currentYear} {getText('footer_brand_title', 'Pousada da Villa')}. {getText('footer_copyright', 'Todos os direitos reservados.')}</p>
+            <p className="footer-subtitle">
+              {getText('footer_subtitle', 'Desenvolvido com carinho para sua estadia perfeita')}
+            </p>
           </div>
           
           <div className="footer-social">

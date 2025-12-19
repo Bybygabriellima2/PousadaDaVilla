@@ -1,74 +1,114 @@
-// src/App.jsx
+// ======================================
+// src/App.jsx - COMPLETO E ATUALIZADO
+// ======================================
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ConfigProvider } from './contexts/ConfigContext';
+import { PagesProvider } from './contexts/PagesContext';
+import ScrollToTop from './components/ScrollToTop';
+import DynamicStyles from './components/DynamicStyles'; // 🔥 IMPORTAÇÃO CRÍTICA
 import Header from './components/Header';
 import Footer from './components/Footer';
+
+// Páginas Públicas
 import Home from './pages/Home';
 import Pousada from './pages/Pousada';
 import Quartos from './pages/Quartos';
 import Localizacao from './pages/Localizacao';
 import Contato from './pages/Contato';
-import ScrollToTop from './components/ScrollToTop';
 
-// Admin Imports - ATENÇÃO AOS CAMINHOS
+// Páginas Admin
 import Login from './pages/admin/Login';
+import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import Customize from './pages/admin/Customize';
-import Content from './pages/admin/Content'; // Novo
-import Gallery from './pages/admin/Gallery'; // Novo
-import Settings from './pages/admin/Settings'; // Novo
-
-// Se você manteve o layout na pasta pages, use este import:
-import AdminLayout from './pages/admin/AdminLayout';
-// Se você moveu para components, use este:
-// import AdminLayout from './components/admin/AdminLayout';
+import TextEditor from './pages/admin/TextEditor';
+import SiteImages from './pages/admin/SiteImages';
+import GalleryAdmin from './pages/admin/GalleryAdmin';
+import PagesManager from './pages/admin/PagesManager';
+import Settings from './pages/admin/Settings';
 
 import './styles/main.css';
-import './styles/footer-styles.css';
-import './styles/pousada-styles.css';
-import './styles/quartos-styles.css';
-import './styles/localizacao-styles.css';
-import './styles/contato-styles.css';
 import './styles/admin-styles.css';
 
-const ProtectedRoute = ({ children }) => {
+// Componente de Proteção de Rota
+const PrivateRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('isAdminAuthenticated') === 'true';
   return isAuthenticated ? children : <Navigate to="/admin" />;
 };
 
-const SiteLayout = ({ children }) => (
-  <div className="app">
-    <Header />
-    {children}
-    <Footer />
-  </div>
-);
-
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        {/* Site Público */}
-        <Route path="/" element={<SiteLayout><Home /></SiteLayout>} />
-        <Route path="/a-pousada" element={<SiteLayout><Pousada /></SiteLayout>} />
-        <Route path="/quartos" element={<SiteLayout><Quartos /></SiteLayout>} />
-        <Route path="/localizacao" element={<SiteLayout><Localizacao /></SiteLayout>} />
-        <Route path="/contato" element={<SiteLayout><Contato /></SiteLayout>} />
-
-        {/* Admin Login */}
-        <Route path="/admin" element={<Login />} />
+    <ConfigProvider>
+      <PagesProvider>
+        {/* 🔥 DYNAMICSTYLES DEVE ESTAR AQUI - DENTRO DOS PROVIDERS */}
+        <DynamicStyles />
         
-        {/* Painel Administrativo */}
-        <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="customize" element={<Customize />} />
-          <Route path="content" element={<Content />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-      </Routes>
-    </Router>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            {/* Rotas Públicas */}
+            <Route path="/" element={
+              <>
+                <Header />
+                <Home />
+                <Footer />
+              </>
+            } />
+            
+            <Route path="/a-pousada" element={
+              <>
+                <Header />
+                <Pousada />
+                <Footer />
+              </>
+            } />
+            
+            <Route path="/quartos" element={
+              <>
+                <Header />
+                <Quartos />
+                <Footer />
+              </>
+            } />
+            
+            <Route path="/localizacao" element={
+              <>
+                <Header />
+                <Localizacao />
+                <Footer />
+              </>
+            } />
+            
+            <Route path="/contato" element={
+              <>
+                <Header />
+                <Contato />
+                <Footer />
+              </>
+            } />
+
+            {/* Login Admin */}
+            <Route path="/admin" element={<Login />} />
+            
+            {/* Rotas Admin Protegidas */}
+            <Route path="/admin" element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="customize" element={<Customize />} />
+              <Route path="texts" element={<TextEditor />} />
+              <Route path="images" element={<SiteImages />} />
+              <Route path="gallery" element={<GalleryAdmin />} />
+              <Route path="pages" element={<PagesManager />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </Router>
+      </PagesProvider>
+    </ConfigProvider>
   );
 }
 

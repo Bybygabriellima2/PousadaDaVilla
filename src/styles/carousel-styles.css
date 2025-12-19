@@ -1,17 +1,29 @@
-/* carousel-styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap');
+/* carousel-styles.css - DESIGN MODERNIZADO */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
 /* Carousel Styles */
 .carousel {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 92vh;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  --primary-color: #daa520; /* Gold accent color */
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+  --primary-color: #daa520;
   --text-color: #ffffff;
   --transition-speed: 600ms;
   z-index: 1;
+}
+
+.carousel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(218, 165, 32, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .carousel-container {
@@ -31,6 +43,16 @@
   background-repeat: no-repeat;
   will-change: opacity;
   isolation: isolate;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    transform: scale(1.08) translateX(-2%);
+  }
 }
 
 .carousel-overlay {
@@ -40,12 +62,26 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.3) 100%
+    135deg,
+    rgba(0, 0, 0, var(--carousel-overlay-opacity, 0.75)) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    transparent 100%
   );
-  z-index: -1;
+  z-index: 1;
+}
+
+.carousel-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(218, 165, 32, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(218, 165, 32, 0.1) 0%, transparent 40%);
+  mix-blend-mode: overlay;
 }
 
 .carousel-content {
@@ -58,22 +94,39 @@
 }
 
 .carousel-caption {
-  max-width: 600px;
+  max-width: 700px;
   color: var(--text-color);
   text-align: left;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .carousel-subtitle {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.05rem;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
+  letter-spacing: 4px;
+  margin-bottom: 1.5rem;
+  color: var(--carousel-subtitle-color, var(--primary-color));
   position: relative;
-  padding-left: 30px;
+  padding-left: 45px;
+  background: linear-gradient(90deg, var(--primary-color), rgba(218, 165, 32, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .carousel-subtitle::before {
@@ -81,68 +134,97 @@
   position: absolute;
   top: 50%;
   left: 0;
-  width: 20px;
-  height: 1px;
-  background-color: var(--primary-color);
+  width: 35px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
 }
 
 .carousel-caption h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: var(--carousel-title-size, 4rem);
+  font-weight: 900;
   line-height: 1.1;
-  margin: 0 0 1.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  margin: 0 0 2rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.carousel-caption h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.6);
 }
 
 .carousel-button {
   display: inline-flex;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: var(--text-color);
-  background-color: transparent;
-  border: 1px solid var(--primary-color);
-  padding: 12px 28px;
-  margin-top: 1.5rem;
+  background: linear-gradient(135deg, transparent, transparent);
+  border: 2px solid var(--carousel-button-border-color, var(--primary-color));
+  padding: 16px 36px;
+  margin-top: 2rem;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(218, 165, 32, 0.2);
 }
 
-.carousel-button::after {
+.carousel-button::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary-color);
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: linear-gradient(135deg, var(--primary-color), rgba(218, 165, 32, 0.8));
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
   z-index: -1;
-  transition: all 0.4s ease;
+}
+
+.carousel-button:hover::before {
+  width: 400%;
+  height: 400%;
 }
 
 .carousel-button:hover {
   color: #000;
-}
-
-.carousel-button:hover::after {
-  left: 0;
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(218, 165, 32, 0.4);
 }
 
 .carousel-button svg {
-  width: 16px;
-  height: 16px;
-  margin-left: 10px;
-  transition: transform 0.3s ease;
+  width: 18px;
+  height: 18px;
+  margin-left: 12px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-button:hover svg {
-  transform: translateX(5px);
+  transform: translateX(8px);
 }
 
 /* Progress Bar */
@@ -151,25 +233,59 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.2);
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
   z-index: 10;
+  overflow: hidden;
+}
+
+.carousel-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .carousel-progress-bar {
   height: 100%;
-  background-color: var(--primary-color);
+  background: linear-gradient(90deg, var(--primary-color), rgba(218, 165, 32, 0.7));
   transition: width var(--transition-speed) ease;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.8), 0 0 40px rgba(218, 165, 32, 0.4);
+  position: relative;
 }
 
-/* Navigation Controls - IMPROVED */
+.carousel-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+  filter: blur(10px);
+}
+
+/* Navigation Controls */
 .carousel-navigation {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px;
   left: 10%;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   z-index: 10;
 }
 
@@ -177,44 +293,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(218, 165, 32, 0.85);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.9), rgba(218, 165, 32, 0.7));
   color: #000;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+.carousel-arrow:hover::before {
+  width: 200%;
+  height: 200%;
 }
 
 .carousel-arrow:hover {
-  background-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 35px rgba(218, 165, 32, 0.5);
+  border-color: var(--primary-color);
 }
 
-.carousel-arrow.improved {
-  backdrop-filter: blur(5px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+.carousel-arrow svg {
+  position: relative;
+  z-index: 1;
 }
 
 /* Dots Navigation */
 .carousel-dots {
   display: flex;
-  gap: 12px;
+  gap: 15px;
 }
 
 .carousel-dot {
-  width: 40px;
-  height: 4px;
-  background-color: rgba(255, 255, 255, 0.3);
+  width: 50px;
+  height: 5px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3));
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   padding: 0;
   border: none;
   position: relative;
   overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dot-inner {
@@ -223,8 +362,9 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: var(--primary-color);
-  transition: left 0.3s ease;
+  background: linear-gradient(90deg, var(--primary-color), rgba(218, 165, 32, 0.8));
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
 }
 
 .carousel-dot.active .dot-inner {
@@ -232,43 +372,54 @@
 }
 
 .carousel-dot:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.4);
+  transform: scaleY(1.4);
 }
 
 /* Slide Counter */
 .carousel-counter {
   position: absolute;
   right: 10%;
-  bottom: 50px;
+  bottom: 60px;
   display: flex;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
   color: white;
   z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 15px 25px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-counter .current {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 800;
   color: var(--primary-color);
+  text-shadow: 0 2px 10px rgba(218, 165, 32, 0.5);
+  position: relative;
 }
 
 .carousel-counter .separator {
-  font-size: 1rem;
-  margin: 0 5px;
-  opacity: 0.6;
+  font-size: 1.2rem;
+  margin: 0 8px;
+  opacity: 0.5;
+  font-weight: 300;
 }
 
 .carousel-counter .total {
-  font-size: 1rem;
-  opacity: 0.6;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  font-weight: 600;
 }
 
 /* Social Icons */
 .carousel-social {
   position: absolute;
   right: 10%;
-  top: 50px;
+  top: 60px;
   display: flex;
   gap: 15px;
   z-index: 10;
@@ -278,37 +429,72 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border: none;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   text-decoration: none;
   color: white;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+.social-icon:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.social-icon i {
+  position: relative;
+  z-index: 1;
 }
 
 .social-icon:hover {
-  background-color: var(--primary-color);
   color: #000;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px) rotate(5deg);
+  box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4);
+  border-color: var(--primary-color);
 }
 
 /* Responsive Styles */
 @media (max-width: 992px) {
+  .carousel {
+    height: 85vh;
+  }
+
   .carousel-caption h2 {
-    font-size: 2.8rem;
+    font-size: 3rem;
+  }
+  
+  .carousel-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 3px;
   }
   
   .carousel-counter {
-    bottom: 40px;
+    bottom: 50px;
   }
   
   .carousel-navigation {
-    bottom: 40px;
+    bottom: 50px;
   }
 }
 
@@ -318,12 +504,17 @@
   }
   
   .carousel-caption h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
   
   .carousel-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
+    padding-left: 35px;
+  }
+
+  .carousel-subtitle::before {
+    width: 25px;
   }
   
   .carousel-content {
@@ -332,38 +523,67 @@
   
   .carousel-navigation {
     left: 8%;
-    bottom: 30px;
+    bottom: 40px;
+    gap: 20px;
+  }
+
+  .carousel-arrow {
+    width: 52px;
+    height: 52px;
   }
   
   .carousel-counter {
     right: 8%;
-    bottom: 30px;
+    bottom: 40px;
+    padding: 12px 20px;
+  }
+
+  .carousel-counter .current {
+    font-size: 1.5rem;
   }
   
   .carousel-social {
     right: 8%;
+    top: 40px;
+  }
+
+  .social-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
   }
   
   .carousel-button {
-    padding: 10px 22px;
-    font-size: 0.85rem;
+    padding: 14px 30px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 576px) {
   .carousel {
-    height: 60vh;
+    height: 65vh;
   }
   
   .carousel-caption h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel-caption h2::after {
+    width: 60px;
+    height: 3px;
+    bottom: -10px;
   }
   
   .carousel-subtitle {
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    padding-left: 30px;
+  }
+
+  .carousel-subtitle::before {
+    width: 20px;
   }
   
   .carousel-content {
@@ -372,47 +592,80 @@
   
   .carousel-navigation {
     left: 5%;
-    bottom: 25px;
-    gap: 12px;
+    bottom: 30px;
+    gap: 15px;
   }
   
   .carousel-arrow {
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
   }
   
   .carousel-counter {
     right: 5%;
-    bottom: 25px;
+    bottom: 30px;
+    padding: 10px 18px;
   }
   
   .carousel-counter .current {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+  }
+
+  .carousel-counter .separator {
+    font-size: 1rem;
+    margin: 0 6px;
   }
   
   .carousel-counter .total {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
   
   .carousel-social {
     right: 5%;
     top: 30px;
-    gap: 10px;
+    gap: 12px;
   }
   
   .social-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
   }
   
   .carousel-button {
-    padding: 8px 18px;
-    font-size: 0.8rem;
-    margin-top: 1rem;
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+    letter-spacing: 1.5px;
+  }
+
+  .carousel-button svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
   }
   
   .carousel-dot {
-    width: 30px;
+    width: 40px;
+    height: 4px;
   }
+
+  .carousel-progress {
+    height: 3px;
+  }
+}
+
+/* Animação de pulsação para elementos interativos */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(218, 165, 32, 0.4);
+  }
+}
+
+.carousel-arrow,
+.social-icon {
+  animation: pulse 3s infinite;
 }

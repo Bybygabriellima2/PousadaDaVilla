@@ -15,7 +15,7 @@ const Login = () => {
     // Simulação simples de autenticação
     if (username === 'admin' && password === 'admin') {
       localStorage.setItem('isAdminAuthenticated', 'true');
-      navigate('/admin/dashboard');
+      navigate('/admin/customize');
     } else {
       setError('Usuário ou senha inválidos');
     }

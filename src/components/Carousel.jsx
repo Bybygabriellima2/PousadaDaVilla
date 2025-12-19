@@ -1,71 +1,76 @@
-// Carousel.jsx
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+// ============================================
+// 1. src/components/Carousel.jsx - COMPLETO
+// ============================================
+import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-// Importando as imagens diretamente
+import { ConfigContext } from '../contexts/ConfigContext';
+import '../styles/carousel-styles.css';
+
 import exteriorImage from '../assets/images/pousada-exterior.jpg';
 import roomImage from '../assets/images/pousada-room.jpg';
 import beachImage from '../assets/images/pousada-beach.jpg';
-import '../styles/carousel-styles.css';
 
 function Carousel() {
+  const { config } = useContext(ConfigContext);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Slides com descrições corrigidas e links
+  const getImageUrl = (configKey, fallback) => {
+    if (config[configKey]) {
+      return config[configKey].startsWith('http') 
+        ? config[configKey] 
+        : `http://localhost:3001${config[configKey]}`;
+    }
+    return fallback;
+  };
+
+  const getText = (key, defaultText) => config[key] || defaultText;
+
   const slides = [
     {
-      image: exteriorImage,
-      title: 'POUSADA DA VILLA',
-      subtitle: 'Seu refúgio de tranquilidade',
-      buttonText: 'Conheça',
+      image: getImageUrl('home_slide_1', exteriorImage),
+      title: getText('home_slide1_title', 'POUSADA DA VILLA'),
+      subtitle: getText('home_slide1_subtitle', 'Seu refúgio de tranquilidade'),
+      buttonText: getText('home_slide1_button', 'Conheça'),
       link: '/a-pousada'
     },
     {
-      image: roomImage,
-      title: 'QUARTOS CONFORTÁVEIS',
-      subtitle: 'Conforto e elegância para sua estadia',
-      buttonText: 'Reservar',
+      image: getImageUrl('home_slide_2', roomImage),
+      title: getText('home_slide2_title', 'QUARTOS CONFORTÁVEIS'),
+      subtitle: getText('home_slide2_subtitle', 'Conforto e elegância para sua estadia'),
+      buttonText: getText('home_slide2_button', 'Reservar'),
       link: '/contato'
     },
     {
-      image: beachImage,
-      title: 'LOCALIZAÇÃO PRIVILEGIADA',
-      subtitle: 'Uma experiência única',
-      buttonText: 'Explorar',
+      image: getImageUrl('home_slide_3', beachImage),
+      title: getText('home_slide3_title', 'LOCALIZAÇÃO PRIVILEGIADA'),
+      subtitle: getText('home_slide3_subtitle', 'Uma experiência única'),
+      buttonText: getText('home_slide3_button', 'Explorar'),
       link: '/localizacao'
     }
   ];
 
   const nextSlide = useCallback(() => {
     if (isTransitioning) return;
-    
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 600);
+    setTimeout(() => setIsTransitioning(false), 600);
   }, [isTransitioning, slides.length]);
 
   const prevSlide = useCallback(() => {
     if (isTransitioning) return;
-    
     setIsTransitioning(true);
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 600);
+    setTimeout(() => setIsTransitioning(false), 600);
   }, [isTransitioning, slides.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
     }, 7000);
-
     return () => clearInterval(interval);
   }, [nextSlide]);
 
@@ -73,13 +78,9 @@ function Carousel() {
     if (isTransitioning || index === currentSlide) return;
     setIsTransitioning(true);
     setCurrentSlide(index);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 600);
+    setTimeout(() => setIsTransitioning(false), 600);
   };
 
-  // Touch handlers for mobile swipe
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -96,12 +97,20 @@ function Carousel() {
     }
   };
 
-  // Calculate progress for the progress bar
   const slideProgress = ((currentSlide + 1) / slides.length) * 100;
+
+  // Estilos dinâmicos do carousel
+  const carouselStyles = {
+    '--carousel-overlay-opacity': config.carousel_overlay_opacity || '0.7',
+    '--carousel-title-size': config.carousel_title_size || '3.5rem',
+    '--carousel-subtitle-color': config.carousel_subtitle_color || '#daa520',
+    '--carousel-button-border-color': config.carousel_button_border_color || '#daa520'
+  };
 
   return (
     <div 
       className="carousel"
+      style={carouselStyles}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -159,12 +168,7 @@ function Carousel() {
         <span className="total">{String(slides.length).padStart(2, '0')}</span>
       </div>
       
-      <div className="carousel-social">
-     
-        <a href="#" className="social-icon" aria-label="WhatsApp">
-          <i className="fab fa-whatsapp"></i>
-        </a>
-      </div>
+      
     </div>
   );
 }
